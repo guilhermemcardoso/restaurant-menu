@@ -1,14 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React from 'react';
+import React, { useEffect } from 'react';
+import RNBootSplash from "react-native-bootsplash";
 import {
   SafeAreaView,
   ScrollView,
@@ -61,6 +52,10 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    RNBootSplash.hide({ fade: true });
+  }, [])
 
   return (
     <SafeAreaView style={backgroundStyle}>
