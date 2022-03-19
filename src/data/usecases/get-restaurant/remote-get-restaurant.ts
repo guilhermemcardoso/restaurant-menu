@@ -10,7 +10,7 @@ import response from '../../../assets/responses/get-restaurant';
 export class RemoteGetRestaurant implements GetRestaurant {
   constructor(private readonly httpGetClient: HttpGetClient) {}
 
-  async get(): Promise<Restaurant | undefined> {
+  async get(): Promise<GetRestaurant.Response> {
     try {
       // const httpResponse = await this.httpGetClient.get({
       //   url: `${API_URL}restaurant/${RESTAURANT_ID}?key=${API_KEY}`,
@@ -44,9 +44,9 @@ export class RemoteGetRestaurant implements GetRestaurant {
           } as Menu;
         }),
       };
-      return restaurant;
+      return {error: false, message: 'ok', restaurant};
     } catch(error) {
-      
+      return {error: true, message: 'something went wrong', restaurant: undefined};
     }
   }
 }
