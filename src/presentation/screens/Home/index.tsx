@@ -14,6 +14,7 @@ import { Section } from '../../../domain/models/section';
 import MenuItemList from '../../components/MenuItemList';
 import { Menuitem } from '../../../domain/models/menuitem';
 import { secondaryDivider } from '../../../assets/colors';
+import log from '../../../infra/log';
 
 type Props = {
   getRestaurant: GetRestaurant;
@@ -40,7 +41,7 @@ const Home = ({getRestaurant}: Props) => {
   }
 
   const onSelectMenuitem = (menuitem: Menuitem) => {
-    console.log('Clicked')
+    log('Clicked', menuitem)
   }
 
   return loading ? (
