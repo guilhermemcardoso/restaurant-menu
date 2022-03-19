@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {textPrimary} from '../../../assets/colors';
+import {disabled, textPrimary} from '../../../assets/colors';
 
 interface ItemProps {
   selected: boolean;
@@ -18,10 +18,11 @@ export const SectionItemContainer = styled.TouchableOpacity<ItemProps>`
   border-bottom-width: ${props => (props.selected ? '2px' : '0px')};
 `;
 
-export const SectionItemText = styled.Text`
+export const SectionItemText = styled.Text<ItemProps>`
   font-family: 'Montserrat-Regular';
   font-size: 22px;
   line-height: 27px;
   text-align: center;
   color: ${textPrimary};
+  color: ${props => (props.selected ? textPrimary : disabled)};
 `;

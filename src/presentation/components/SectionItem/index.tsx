@@ -16,7 +16,7 @@ const SectionItem = ({item, onPress, selected}: SectionItemProps) => {
 
   return (
     <SectionItemContainer onPress={handlePress} selected={selected}>
-      <SectionItemText>{item.name || ''}</SectionItemText>
+      <SectionItemText selected={selected}>{item.name || ''}</SectionItemText>
     </SectionItemContainer>
   );
 };

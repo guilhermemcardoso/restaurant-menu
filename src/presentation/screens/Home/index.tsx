@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {HomePageContainer, ContentContainer} from './styles';
 import PageTitle from '../../components/PageTitle';
 import Loading from '../../components/Loading';
@@ -8,31 +8,45 @@ import SectionList from '../../components/SectionList';
 import MenuItemList from '../../components/MenuItemList';
 import {secondaryDivider} from '../../../assets/colors';
 import {RestaurantContext} from '../../../data/contexts/restaurant-context';
+import ErrorHandler from '../../components/ErrorHandler';
 
 const Home = () => {
-  const {restaurant, loading, selectMenuItem, selectMenuSection, menuSection} =
-    useContext(RestaurantContext);
+  const {
+    restaurant,
+    loading,
+    selectMenuItem,
+    selectMenuSection,
+    getRestaurant,
+    menuSection,
+    error,
+  } = useContext(RestaurantContext);
 
   return loading ? (
     <Loading />
   ) : (
     <HomePageContainer>
-      <PageTitle title={restaurant?.name} />
-      <Divider />
-      <ContentContainer>
-        <MenuTitle title="MENU" />
-        <Divider color={secondaryDivider} />
-        <SectionList
-          selectedSection={menuSection}
-          onSelectItem={selectMenuSection}
-          data={restaurant?.menus[0]?.sections || []}
-        />
-        <Divider color={secondaryDivider} />
-        <MenuItemList
-          onSelectItem={selectMenuItem}
-          data={menuSection?.menuitems || []}
-        />
-      </ContentContainer>
+      {error ? (
+        <ErrorHandler message='Something went wrong' actionLabel='Try again' actionFunction={getRestaurant} />
+      ) : (
+        <>
+          <PageTitle title={restaurant?.name} />
+          <Divider />
+          <ContentContainer>
+            <MenuTitle title="MENU" />
+            <Divider color={secondaryDivider} />
+            <SectionList
+              selectedSection={menuSection}
+              onSelectItem={selectMenuSection}
+              data={restaurant?.menus[0]?.sections || []}
+            />
+            <Divider color={secondaryDivider} />
+            <MenuItemList
+              onSelectItem={selectMenuItem}
+              data={menuSection?.menuitems || []}
+            />
+          </ContentContainer>
+        </>
+      )}
     </HomePageContainer>
   );
 };

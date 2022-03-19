@@ -4,10 +4,6 @@ import {textPrimary, textSecondary} from '../../../assets/colors';
 export const MenuItemContainer = styled.TouchableOpacity`
   padding-top: 36px;
   padding-bottom: 36px;
-  padding-right: 6px;
-  padding-left: 6px;
-  margin-right: 24px;
-  margin-left: 24px;
   justify-content: center;
   align-items: center;
 `;
