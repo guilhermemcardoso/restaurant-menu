@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
-import {HomeFactory} from './src/main/factories/screens/Home';
+import Router from './src/main/routes/router';
 
 const App = () => {
   useEffect(() => {
     RNBootSplash.hide({fade: true});
   }, []);
 
-  return <HomeFactory />;
+  return <Router />;
 };
 
 export default App;
