@@ -1,10 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
 import {RESTAURANT_ID} from '@env';
-// import { ButtonContainer, Header, WeatherContainer, MainContainer, Footer } from "./styles";
 
 import {GetRestaurant} from '../../../domain/usecases/get-restaurant';
 import {Restaurant} from '../../../domain/models/restaurant';
+
+import {HomePageContainer, ContentContainer} from './styles';
+import PageTitle from '../../components/PageTitle';
+import Loading from '../../components/Loading';
+import Divider from '../../components/Divider';
+import MenuTitle from '../../components/MenuTitle';
+import SectionList from '../../components/SectionList';
+import { Section } from '../../../domain/models/section';
+import MenuItemList from '../../components/MenuItemList';
+import { Menuitem } from '../../../domain/models/menuitem';
+import { secondaryDivider } from '../../../assets/colors';
 
 type Props = {
   getRestaurant: GetRestaurant;
@@ -12,22 +21,46 @@ type Props = {
 
 const Home = ({getRestaurant}: Props) => {
   const [restaurant, setRestaurant] = useState<Restaurant>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [selectedSection, setSelectedSection] = useState<Section>();
 
   useEffect(() => {
     async function loadRestaurantInfo() {
-        setLoading(true);
-        console.log('before', restaurant)
-        const response = await getRestaurant.get({ restaurantId: RESTAURANT_ID});
-        console.log('after', restaurant)
-        setRestaurant(response);
-        setLoading(false);
+      setLoading(true);
+      const response = await getRestaurant.get({restaurantId: RESTAURANT_ID});
+      setRestaurant(response);
+      setLoading(false);
     }
-    
+
     loadRestaurantInfo();
   }, []);
-  console.log('restaurant', restaurant)
-  return <Text style={{color: '#000000', fontSize: 30, paddingTop: 30, textAlign: 'center', backgroundColor: '#ff0000'}}>Restaurant</Text>;
+
+  const onSelectSection = (section: Section) => {
+    setSelectedSection(section)
+  }
+
+  const onSelectMenuitem = (menuitem: Menuitem) => {
+    console.log('Clicked')
+  }
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <HomePageContainer>
+      <PageTitle title={restaurant?.name} />
+      <Divider />
+      <ContentContainer>
+        <MenuTitle title='MENU' />
+        <Divider color={secondaryDivider} />
+        <SectionList selectedSection={selectedSection} onSelectItem={onSelectSection} data={restaurant?.menus[0].sections || []} />
+        <Divider color={secondaryDivider} />
+        <MenuItemList 
+          onSelectItem={onSelectMenuitem}
+          data={selectedSection?.menuitems || []} 
+        />
+      </ContentContainer>
+    </HomePageContainer>
+  );
 };
 
 export default Home;
