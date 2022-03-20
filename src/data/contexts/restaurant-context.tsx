@@ -1,10 +1,10 @@
-import React, {createContext, useState, ReactNode, useEffect} from 'react';
-import {RemoteGetRestaurant} from '../usecases/get-restaurant/remote-get-restaurant';
+import React, {createContext, useState, useEffect} from 'react';
 import {RestaurantContextData} from '../../domain/contexts/restaurant-context';
 import {Restaurant} from '../../domain/models/restaurant';
 import {Section} from '../../domain/models/section';
 import {Menuitem} from '../../domain/models/menuitem';
 import {RestaurantProviderProps} from '../../domain/contexts/restaurant-provider-props';
+import { RESTAURANT_ID } from '@env';
 
 export const RestaurantContext = createContext({} as RestaurantContextData);
 
@@ -29,7 +29,7 @@ export function RestaurantProvider({
 
   async function getRestaurant() {
     setLoading(true);
-    const response = await remoteGetRestaurant.get();
+    const response = await remoteGetRestaurant.get({ restaurantId: RESTAURANT_ID});
     setRestaurant(response.restaurant);
     setError(response.error);
     setMessage(response.message);

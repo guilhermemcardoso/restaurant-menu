@@ -1,5 +1,4 @@
 import React from 'react';
-import {Menuitem} from '../../../domain/models/menuitem';
 import {
   EmptyMenuItemListContainer,
   EmptyMenuItemListMessage

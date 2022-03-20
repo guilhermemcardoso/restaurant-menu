@@ -5520,6 +5520,10 @@ const response = {
       last_updated: '2021-01-05T07:47:41.631Z',
     },
   },
+  status: 200,
+  statusText: 'OK',
+  config: {},
+  headers: {},
 };
 
 export default response;

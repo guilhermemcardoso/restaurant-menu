@@ -1,17 +1,21 @@
 import React from 'react';
-import { Menuitem } from '../../../domain/models/menuitem';
-import {MenuItemContainer, MenuItemName, MenuItemDescription, MenuItemPrice} from './styles';
+import {Menuitem} from '../../../domain/models/menuitem';
+import {
+  MenuItemContainer,
+  MenuItemName,
+  MenuItemDescription,
+  MenuItemPrice,
+} from './styles';
 
 interface MenuItemProps {
   item: Menuitem;
-  onPress: (menuitem: Menuitem) => void;
+  onPress?: (menuitem: Menuitem) => void;
 }
 
 const MenuItem = ({item, onPress}: MenuItemProps) => {
-
   const handlePress = () => {
-    onPress(item)
-  }
+    if (onPress) onPress(item);
+  };
 
   return (
     <MenuItemContainer onPress={handlePress}>

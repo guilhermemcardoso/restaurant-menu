@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { RemoteGetRestaurant } from "../../data/usecases/get-restaurant/remote-get-restaurant";
+import { GetRestaurant } from "../usecases/get-restaurant";
 
 export interface RestaurantProviderProps {
   children: ReactNode;
-  remoteGetRestaurant: RemoteGetRestaurant;
+  remoteGetRestaurant: GetRestaurant;
 }

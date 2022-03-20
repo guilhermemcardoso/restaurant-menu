@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import {disabled, textPrimary} from '../../../assets/colors';
 
 interface ItemProps {
-  selected: boolean;
+  selected?: boolean;
 }
 
 export const SectionItemContainer = styled.TouchableOpacity<ItemProps>`

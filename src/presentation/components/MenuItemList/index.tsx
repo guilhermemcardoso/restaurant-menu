@@ -8,10 +8,11 @@ import EmptyMenuItemList from '../EmptyMenuItemList';
 
 interface MenuItemListProps {
   data: Menuitem[];
-  onSelectItem: (menuitem: Menuitem) => void;
+  onSelectItem?: (menuitem: Menuitem) => void;
+  emptyListMessage?: string;
 }
 
-const MenuItemList = ({data, onSelectItem}: MenuItemListProps) => {
+const MenuItemList = ({data, onSelectItem, emptyListMessage}: MenuItemListProps) => {
   const renderItem: ListRenderItem<Menuitem> = ({item, index}) => (
     <MenuItem onPress={onSelectItem} item={item} />
   );
@@ -20,6 +21,7 @@ const MenuItemList = ({data, onSelectItem}: MenuItemListProps) => {
       {data.length > 0 ? (
         <List<any>
           data={data}
+          testID="menu-item-list"
           renderItem={renderItem}
           keyExtractor={(item: Menuitem, index: number) =>
             `${index}-${item.name}-${item.description}-${item.price}`
@@ -28,7 +30,7 @@ const MenuItemList = ({data, onSelectItem}: MenuItemListProps) => {
           showsVerticalScrollIndicator={false}
         />
       ) : (
-        <EmptyMenuItemList message='Select a section to see its items' />
+        <EmptyMenuItemList message={emptyListMessage ? emptyListMessage : 'Select a section to see its items'} />
       )}
     </ListContainer>
   );

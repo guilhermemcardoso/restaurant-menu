@@ -5,18 +5,18 @@ import {API_URL, API_KEY, RESTAURANT_ID} from '@env';
 import {Menu} from '../../../domain/models/menu';
 import {Section} from '../../../domain/models/section';
 import {Menuitem} from '../../../domain/models/menuitem';
-import response from '../../../assets/responses/get-restaurant';
+import response from '../../../assets/responses/get-restaurant-success';
 
 export class RemoteGetRestaurant implements GetRestaurant {
   constructor(private readonly httpGetClient: HttpGetClient) {}
 
   async get(): Promise<GetRestaurant.Response> {
     try {
-      // const httpResponse = await this.httpGetClient.get({
-      //   url: `${API_URL}restaurant/${RESTAURANT_ID}?key=${API_KEY}`,
-      // });
+      const httpResponse = await this.httpGetClient.get({
+        url: `${API_URL}restaurant/${RESTAURANT_ID}?key=${API_KEY}`,
+      });
 
-      const httpResponse = response;
+      // const httpResponse = response;
       const {
         data: {result},
       } = httpResponse;
@@ -46,6 +46,7 @@ export class RemoteGetRestaurant implements GetRestaurant {
       };
       return {error: false, message: 'ok', restaurant};
     } catch(error) {
+      
       return {error: true, message: 'something went wrong', restaurant: undefined};
     }
   }

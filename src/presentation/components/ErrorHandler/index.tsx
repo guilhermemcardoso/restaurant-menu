@@ -8,7 +8,7 @@ import {
 interface ErrorHandlerProps {
   message: string;
   actionLabel: string;
-  actionFunction: () => void;
+  actionFunction?: () => void;
 }
 
 const ErrorHandler = ({
