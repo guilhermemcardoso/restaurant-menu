@@ -1,15 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeFactory} from '../factories/screens/Home';
 
-export default function Router() {
-  const Stack = createNativeStackNavigator();
+interface RouterProps {
+  children: JSX.Element;
+}
+
+export const Stack = createNativeStackNavigator();
+export default function Router({children}: RouterProps) {
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Home" component={HomeFactory} />
+        {children}
       </Stack.Navigator>
     </NavigationContainer>
   );
